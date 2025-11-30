@@ -1,37 +1,76 @@
 /* Estilos Globais */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
 * {
     box-sizing: border-box;
+    /* Mantendo a mesma fonte e redefinindo margem/padding */
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #b2ebf2, #e0f7fa);
+    /* 1. Mudar o fundo para a estrutura do style.css (fundo de piscina com overlay) */
+    height: 100vh;
+    /* Altere o caminho da imagem se necessário, mantive o padrão do style.css */
+    background-image: url('../img/fundo-piscina.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    position: relative; 
     color: #2c3e50;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
+
+/* Overlay para o fundo - COPIADO DO style.css */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 50, 70, 0.4); /* Azul escuro semi-transparente */
+    z-index: -1; 
+}
+
 
 /* Cabeçalho */
 header {
-    background-color: #03a9f4;
     color: white;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0, 105, 148, 0.5);
+    /* Sombra mais clara, remetendo ao tema água/piscina */
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
+.header-logo {
+    max-height: 50px; 
+    
+    height: auto; 
+    
+    margin-right: 15px; 
+    
+    cursor: default; 
+
+    border-radius: 15%;
+}
+
 header h1 {
-    font-size: 1.5rem;
+    /* Garante que o H1 (e a logo) esteja alinhado com o botão de voltar */
+    display: flex; 
+    align-items: center;
+    font-size: 1.5rem; /* Mantém o tamanho do texto original, se houver */
 }
 
 .user-info {
@@ -43,22 +82,24 @@ header h1 {
 }
 
 header button {
-    background: linear-gradient(135deg, #03a9f4, #0288d1);
+    /* Gradiente com as cores tema */
+    background: linear-gradient(135deg, #1583c3, #00bcd4); 
     border: none;
-    border-radius: 12px;
+    border-radius: 8px; /* Mais consistente com o style.css */
     color: white;
     cursor: pointer;
     font-weight: 700;
     padding: 10px 22px;
-    box-shadow: 0 5px 15px rgba(3, 169, 244, 0.6);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    /* Sombra de destaque */
+    box-shadow: 0 5px 15px rgba(2, 119, 189, 0.6); 
+    transition: all 0.3s ease;
     user-select: none;
 }
 
 header button:hover,
 header button:focus {
-    background-color: #0277bd;
-    box-shadow: 0 8px 25px rgba(3, 169, 244, 0.9);
+    background: #019114; /* Azul mais escuro no hover */
+    box-shadow: 0 8px 25px rgba(2, 119, 189, 0.9);
     transform: translateY(-2px);
     outline: none;
 }
@@ -71,186 +112,193 @@ main {
     align-items: flex-start;
     padding: 40px 20px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px; /* Aumentei um pouco o max-width para um dashboard */
     margin: 0 auto;
+    z-index: 1; /* Para ficar acima do overlay do body */
 }
+
 
 /* Dashboard Principal */
 .dashboard-container {
-    background: #e0f7fa;
-    border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0, 105, 148, 0.3);
+    /* Fundo claro, consistente com o style.css */
+    background: #ffffff; 
+    border-radius: 10px; /* Raio de borda do container do style.css */
+    /* Sombra nítida e profunda */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
     padding: 40px 30px;
     width: 100%;
-    max-width: 650px;
+    max-width: 1200px; 
+    /* height: 75%; Removido, pois o layout de grid ajustará a altura */
     text-align: center;
     transition: box-shadow 0.3s ease;
+    border: 1px solid #e0f7fa; /* Borda sutil do style.css */
 }
 
 .dashboard-container:hover {
-    box-shadow: 0 20px 50px rgba(0, 105, 148, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-container h2 {
-    color: #01579b;
+    color: #00796b; /* Cor do título do style.css */
     margin-bottom: 25px;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.2rem; 
+    font-weight: 800;
     letter-spacing: 1px;
 }
 
 .dashboard-container p {
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; Removido para não criar espaço extra nos cards */
+    margin-bottom: 10px;
     color: #2c3e50;
     font-size: 1.1rem;
     line-height: 1.6;
 }
 
-/* Cards */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+.dashboard-produtos {
+    border-radius: 10px; 
+    width: 100%;
+    /* Aumenta max-width para acomodar formulários maiores */
+    max-width: 1000px; 
+    padding: 40px;
+    background: #ffffff;
+    
+  
 }
 
+.dashboard-produtos h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #00796b;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    
+  
+}
+
+/* --- NOVO LAYOUT PRINCIPAL: 3 COLUNAS (Ações | Métricas | Ações) --- */
+
+.dashboard-layout {
+    display: grid;
+    /* Define 3 colunas: uma lateral estreita, uma central larga (1.5x o tamanho), e outra lateral estreita */
+    grid-template-columns: 1fr 1.5fr 1fr; 
+    gap: 30px;
+    margin-top: 30px;
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    text-align: left; /* Alinha o conteúdo das colunas à esquerda */
+}
+
+/* Estilo para as Colunas Laterais de Ação */
+.coluna-acao {
+    display: flex;
+    flex-direction: column; /* Coloca os cards um abaixo do outro */
+    gap: 25px; /* Espaço entre os cards */
+}
+
+/* Estilo para a Coluna Central de Métricas */
+.coluna-metricas {
+    display: flex;
+    flex-direction: column; /* Coloca os cards um abaixo do outro */
+    gap: 20px; /* Espaço entre os cards de métrica */
+}
+
+/* Cards (Estilos gerais aplicados aos cards de ação e métrica) */
 .card {
-    background: #b2ebf2;
-    border-radius: 16px;
+    /* Cor de fundo semelhante ao toggle do style.css */
+    background: #e0f7fa; 
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 5px 5px 15px #81d4fa,
-                -5px -5px 15px #e0f7fa;
+    /* Sombra de destaque mais suave, como o hover do toggle/input */
+    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    border: 1px solid #b2ebf2; /* Borda clara */
+    width: 100%;
+
+}
+
+.card-grid {
+    display: grid;
+    gap: 10px;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(3, 169, 244, 0.6);
+    transform: translateY(-4px);
+    /* Sombra mais intensa no hover */
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
 }
 
 .card h3 {
-    color: #0277bd;
+    color: #0277bd; /* Azul escuro secundário */
     margin: 0 0 10px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
 .card p {
-    color: #2c3e50;
+    color: #333; /* Cor mais escura para o texto */
     font-size: 0.95rem;
+    margin-bottom: 0; /* Ajustado para 0, pois os cards estão empilhados */
+    line-height: 1.4;
 }
 
-/* Seção de Produtos */
-.dashboard-produtos {
-    background: #e0f7fa;
-    border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0, 105, 148, 0.3);
-    padding: 40px;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
+/* Ajuste do ícone para ter a cor principal */
+.card h3 i {
+    margin-right: 10px;
+    color: #00bcd4; 
+    transition: color 0.3s ease;
 }
 
-.produtos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+/* --- Estilos Específicos de Métrica --- */
+
+.metric-card {
+    /* Fundo levemente mais suave para diferenciar das ações puras */
+    background: #f0f8ff; 
+    border: 1px solid #b2ebf2;
+    padding: 30px 20px; /* Mais padding para o número grande */
+    transform: none; /* Remove o hover de levantar */
+    text-align: center; /* Centraliza o conteúdo das métricas */
 }
 
-.produto-card {
-    background: white;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+.metric-card:hover {
+     /* Sombra suave no hover */
+     box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
 }
 
-.produto-card:hover {
-    box-shadow: 0 15px 35px rgba(3, 169, 244, 0.3);
-    transform: translateY(-4px);
-}
-
-.produto-card h3 {
-    color: #01579b;
-    margin-bottom: 10px;
-    font-size: 1.25rem;
-}
-
-.produto-card p {
-    flex-grow: 1;
-    color: #2c3e50;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-}
-
-.preco {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #0288d1;
-    margin-bottom: 15px;
-}
-
-.btn-comprar {
-    background: linear-gradient(135deg, #03a9f4, #0288d1);
-    border: none;
-    color: white;
-    font-weight: 700;
-    padding: 10px 0;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    user-select: none;
-}
-
-.btn-comprar:hover,
-.btn-comprar:focus {
-    background-color: #0277bd;
-    transform: translateY(-2px);
-    outline: none;
-}
-
-/* Ações / Botões */
-.actions {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.actions button {
-    background: linear-gradient(135deg, #03a9f4, #0288d1);
-    color: white;
-    padding: 14px 25px;
-    border: none;
-    border-radius: 18px;
+/* Estilo para o valor da métrica (o número grande) */
+.metric-value {
+    font-size: 2.5rem; /* Aumentei um pouco */
     font-weight: 800;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(3, 169, 244, 0.6);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 0.3s ease;
-    user-select: none;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
+    color: #00796b; 
+    margin-top: 10px;
+    margin-bottom: 0; 
 }
 
-.actions button:hover,
-.actions button:focus {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(3, 169, 244, 0.9);
-    background-color: #0277bd;
-    outline: none;
+/* Estilo para o card de alerta (Ex: Produtos em Falta) */
+.alert-card {
+    background: #fff8e1; /* Amarelo claro suave para o alerta */
+    border: 1px solid #ffb300; 
+    box-shadow: 0 4px 10px rgba(255, 179, 0, 0.3);
 }
+
+.alert-card .metric-value {
+    color: #f57c00; /* Laranja escuro */
+}
+
+.alert-card h3 i {
+    color: #f57c00; /* Ícone laranja */
+}
+
+/* --- Seções que não existem mais, mas mantidas por segurança ---
+.dashboard-produtos, .produtos-grid, .produto-card, .preco, .btn-comprar, .actions {
+    display: none;
+}
+*/
 
 /* Rodapé */
 footer {
-    background-color: #0288d1;
+    /* Cor de fundo harmonizada */
+    background-color: #0277bd;
     color: white;
     text-align: center;
     padding: 14px 0;
@@ -258,9 +306,34 @@ footer {
     font-weight: 600;
     letter-spacing: 0.5px;
     user-select: none;
+    margin-top: auto; /* Garante que o footer vá para o fundo */
 }
 
-/* Responsividade */
+/* --- Responsividade --- */
+
+@media (max-width: 992px) {
+    /* Em telas médias, empilhar as colunas */
+    .dashboard-layout {
+        grid-template-columns: 1fr; /* Volta para 1 coluna */
+        text-align: center; /* Centraliza tudo ao empilhar */
+    }
+    
+    .coluna-metricas {
+        order: 1; /* Coloca as métricas no topo */
+        margin-bottom: 30px;
+    }
+    
+    .coluna-acao {
+        order: 2; /* Coloca as ações abaixo das métricas */
+        margin-bottom: 30px;
+    }
+    
+    /* Centraliza o texto nos cards ao empilhar */
+    .coluna-acao .card, .coluna-metricas .card {
+        text-align: center;
+    }
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -273,27 +346,31 @@ footer {
         font-size: 1.2rem;
     }
 
-    .dashboard-container,
-    .dashboard-produtos {
+    .dashboard-container {
         padding: 30px 20px;
     }
-
-    .actions {
-        max-width: 100%;
+    
+    .card h3, .metric-card h3 {
+        font-size: 1.1rem;
     }
 
-    .actions button {
-        font-size: 1rem;
-        padding: 12px 18px;
-    }
-
-    .card h3,
-    .produto-card h3 {
-        font-size: 1rem;
-    }
-
-    .card p,
-    .produto-card p {
+    .card p, .metric-card p {
         font-size: 0.9rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container h2 {
+        font-size: 1.8rem;
+    }
+    .card {
+        padding: 15px;
+    }
+    .metric-value {
+        font-size: 1.8rem;
     }
 }

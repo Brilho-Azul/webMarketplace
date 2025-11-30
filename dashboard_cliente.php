@@ -19,9 +19,9 @@ $nome = htmlspecialchars($_SESSION['usuario_nome']);
 <body>
 
 <header>
-    <h1>Bem-vindo</h1>
+    <h1><img class="header-logo" src="img/logo.png" alt="Logo da Empresa"> Brilho Azul</h1>
     <div class="user-info">
-        <span>Olá, <?= $nome ?> (Cliente)</span>
+        <span>Olá, <?= $nome ?>!</span>
         <button onclick="window.location.href='logout.php'">Sair</button>
     </div>
 </header>
@@ -31,9 +31,9 @@ $nome = htmlspecialchars($_SESSION['usuario_nome']);
         <h2>Painel do Cliente</h2>
         <p>Você pode visualizar produtos e solicitar serviços.</p>
 
-        <div class="actions">
-            <button onclick="window.location.href='produtos.php'">Comprar Produto</button>
-            <button onclick="window.location.href='servicos.php'">Serviços</button>
+        <div class="card-grid">
+            <button class="card" onclick="window.location.href='produtos.php'">Comprar Produto</button>
+            <button class="card" onclick="window.location.href='servicos.php'">Serviços</button>
         </div>
     </div>
 </main>

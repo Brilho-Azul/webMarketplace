@@ -24,12 +24,12 @@ try {
 </head>
 <body>
 <header>
-  <h1>Gerenciar Produtos & Serviços</h1>
-  <button onclick="window.location.href='dashboard_gerente.php'">Voltar</button>
+    <h1><img class="header-logo" src="img/logo.png" alt="Logo da Empresa"> Brilho Azul</h1>
+    <button onclick="window.location.href='dashboard_gerente.php'">Voltar</button>
 </header>
 
 <main>
-  <div class="container">
+  <div class="container-listar">
     <h2>Produtos</h2>
     <?php if(count($produtos) === 0): ?>
       <p>Nenhum produto cadastrado.</p>

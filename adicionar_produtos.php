@@ -51,55 +51,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Adicionar Produto</title>
-  <link rel="stylesheet" href="css/form.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adicionar Produto</title>
+    <link rel="stylesheet" href="css/form.css" />
 </head>
 <body>
 <header>
-  <h1>Adicionar Produto</h1>
-  <button onclick="window.location.href='dashboard_gerente.php'">Voltar</button>
+    <h1><img class="header-logo" src="img/logo.png" alt="Logo da Empresa"> Brilho Azul</h1>
+    <button onclick="window.location.href='dashboard_gerente.php'">Voltar</button>
 </header>
 
 <main>
-  <div class="container">
-    <?php if ($erros): ?>
-      <div class="message error">
-        <ul>
-          <?php foreach ($erros as $erro): ?>
-            <li><?= htmlspecialchars($erro) ?></li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php elseif ($sucesso): ?>
-      <div class="message success"><?= htmlspecialchars($sucesso) ?></div>
-    <?php endif; ?>
+    <div class="container">
+        <?php if ($erros): ?>
+            <div class="message error">
+                <ul>
+                    <?php foreach ($erros as $erro): ?>
+                        <li><?= htmlspecialchars($erro) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php elseif ($sucesso): ?>
+            <div class="message success"><?= htmlspecialchars($sucesso) ?></div>
+        <?php endif; ?>
 
-    <form method="POST">
-      <label for="nome">Nome do Produto:</label>
-      <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" required placeholder="Digite o nome do produto"/>
+        <form method="POST">
+             <h2>Novo Produto</h2>
+            <div class="form-grid-horizontal">
+                <div class="form-group">
+                    <label for="nome">Nome do Produto:</label>
+                    <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" required placeholder="Digite o nome do produto"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="preco">Preço (R$):</label>
+                    <input type="text" id="preco" name="preco" value="<?= htmlspecialchars($preco) ?>" required pattern="^\d+(\,\d{1,2})?$" placeholder="0,00" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="estoque">Estoque:</label>
+                    <input type="number" id="estoque" name="estoque" value="<?= htmlspecialchars($estoque) ?>" min="0"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" value="<?= htmlspecialchars($marca) ?>" placeholder="Digite a marca do produto" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="fabricante">Fabricante:</label>
+                    <input type="text" id="fabricante" name="fabricante" value="<?= htmlspecialchars($fabricante) ?>" placeholder="Digite o nome do fabricante" />
+                </div>
+                
+                </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="4" style="resize: none;"><?= htmlspecialchars($descricao) ?></textarea>
+            </div>
 
-      <label for="preco">Preço (R$):</label>
-      <input type="text" id="preco" name="preco" value="<?= htmlspecialchars($preco) ?>" required pattern="^\d+(\,\d{1,2})?$" placeholder="0,00" />
-
-      <label for="estoque">Estoque:</label>
-      <input type="number" id="estoque" name="estoque" value="<?= htmlspecialchars($estoque) ?>" min="0"/>
-
-      <label for="marca">Marca:</label>
-      <input type="text" id="marca" name="marca" value="<?= htmlspecialchars($marca) ?>" placeholder="Digite a marca do produto" />
-
-      <label for="fabricante">Fabricante:</label>
-      <input type="text" id="fabricante" name="fabricante" value="<?= htmlspecialchars($fabricante) ?>" placeholder="Digite o nome do fabricante" />
-
-      <label for="descricao">Descrição:</label>
-      <textarea id="descricao" name="descricao" rows="4" style="resize: none;"><?= htmlspecialchars($descricao) ?></textarea>
-
-      <button type="submit" class="submit-btn">Cadastrar Produto</button>
-    </form>
-  </div>
+            <button type="submit" class="submit-btn">Cadastrar Produto</button>
+        </form>
+    </div>
 </main>
 <script src="js/script.js"></script>
 </body>
 </html>
-

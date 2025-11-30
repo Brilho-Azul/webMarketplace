@@ -34,8 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,15 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <header>
-    <h1>Adicionar Serviço</h1>
-    <a href="dashboard_gerente.php">
-        <button>Voltar</button>
-    </a>
+    <h1><img class="header-logo" src="img/logo.png" alt="Logo da Empresa"> Brilho Azul</h1>
+    <button onclick="window.location.href='dashboard_gerente.php'">Voltar</button>
 </header>
 
 <main>
     <div class="container">
-        <h2>Novo Serviço</h2>
 
         <?php if ($sucesso): ?>
             <div class="message success"><?= htmlspecialchars($sucesso) ?></div>
@@ -71,18 +66,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST">
-            <label>Nome</label>
-            <input type="text" name="nome" value="<?= htmlspecialchars($nome ?? '') ?>" required placeholder="Digite o nome do serviço">
-
-            <label for="preco">Preço (R$):</label>
-            <input type="text" id="preco" name="preco" value="<?= htmlspecialchars($preco) ?>" required pattern="^\d+(\,\d{1,2})?$" placeholder="0,00" />
-
-            <label for="fornecedor">Fornecedor:</label>
-            <input type="text" id="fornecedor" name="fornecedor" value="<?= htmlspecialchars($fornecedor) ?>" placeholder="Digite o nome do fornecedor" />
-            
-            <label>Descrição</label>
-            <textarea name="descricao" rows="3" style="resize: none;"><?= htmlspecialchars($descricao ?? '') ?></textarea>
-
+            <h2>Novo Serviço</h2>
+            <div class="form-grid-horizontal">
+                
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome ?? '') ?>" required placeholder="Digite o nome do serviço">
+                </div>
+                
+                <div class="form-group">
+                    <label for="preco">Preço (R$):</label>
+                    <input type="text" id="preco" name="preco" value="<?= htmlspecialchars($preco) ?>" required pattern="^\d+(\,\d{1,2})?$" placeholder="0,00" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="fornecedor">Fornecedor:</label>
+                    <input type="text" id="fornecedor" name="fornecedor" value="<?= htmlspecialchars($fornecedor) ?>" placeholder="Digite o nome do fornecedor" />
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="3" style="resize: none;"><?= htmlspecialchars($descricao ?? '') ?></textarea>
+            </div>
 
 
             <button type="submit" class="submit-btn">Cadastrar Serviço</button>

@@ -27,7 +27,7 @@ try {
 <body>
 
 <header>
-    <h1>Produtos disponíveis</h1>
+    <h1><img class="header-logo" src="img/logo.png" alt="Logo da Empresa"> Brilho Azul</h1>
     <div class="user-info">
         Olá, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>! 
         <button onclick="window.location.href='dashboard_cliente.php'">Voltar</button>
